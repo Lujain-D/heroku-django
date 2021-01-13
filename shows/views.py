@@ -39,8 +39,8 @@ def predict_rating(request):
         try:
 
             json_data = json.loads(request.body)
-            linear_reg = joblib.load("harritasks/shows/lin-reg.sav")
-            scaler = joblib.load("harritasks/shows/lin-reg_scaler.sav")
+            linear_reg = joblib.load("shows/lin-reg.sav")
+            scaler = joblib.load("shows/lin-reg_scaler.sav")
             payload_info = np.array([json_data["year"], json_data["age"], json_data["netflix"], json_data["hulu"], json_data["prime video"], json_data["disney"]]).reshape(1, -1)
             scaled = scaler.transform(payload_info).reshape(1, -1)
             predicted_score = round(linear_reg.predict(scaled)[0], 1)
@@ -48,7 +48,7 @@ def predict_rating(request):
             return JsonResponse(payload)
 
         except:
-            return JsonResponse({"status": 500 })
+            return JsonResponse({"status": 500,  })
 
     else:
         return JsonResponse({"status": 400, "message": "wrong method"})
@@ -75,9 +75,9 @@ def predict_best_application(request):
 
             json_data = json.loads(request.body)
 
-            classifier = joblib.load("harritasks/shows/xg_classifier2.sav")
+            classifier = joblib.load("shows/xg_classifier2.sav")
 
-            scaler = joblib.load("harritasks/shows/classification_scaler2.sav")
+            scaler = joblib.load("shows/classification_scaler2.sav")
 
 
             payload_info = np.array([json_data["year"], json_data["age"], json_data["imdb"]]).reshape(1, -1)
