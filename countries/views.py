@@ -23,6 +23,7 @@ def fetch_continent(request):
         payload = json.loads(request.body)
         county = payload["country"]
         country = Country.objects.filter(name__contains=county["name"])
+        return JsonResponse(list(Country.objects.all()))
         if len(country) == 1:
             return JsonResponse({"status": 200, "continent": {"name": country[0].continent.name, "code": country[0].continent.code}})
 
