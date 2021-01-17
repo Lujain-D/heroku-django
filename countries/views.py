@@ -22,8 +22,7 @@ def fetch_continent(request):
     if request.method == 'POST':
         payload = json.loads(request.body)
         county = payload["country"]
-        country = Country.objects.filter(name__contains=county["name"])
-        return JsonResponse(list(Country.objects.all()))
+        country = Country.objects.filter(name__icontains=county["name"])
         if len(country) == 1:
             return JsonResponse({"status": 200, "continent": {"name": country[0].continent.name, "code": country[0].continent.code}})
 
@@ -38,7 +37,7 @@ def fetch_countries(request):
     if request.method == 'POST':
         payload = json.loads(request.body)
         continent = payload
-        country_list = Country.objects.filter(continent__name__contains=continent["continent"]["name"])
+        country_list = Country.objects.filter(continent__name__icontains=continent["continent"]["name"])
         paginator = Paginator(country_list, 10)
         page_obj = paginator.get_page(payload["page_number"])
         return JsonResponse({"countries": list(page_obj.object_list.values())})
