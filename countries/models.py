@@ -20,7 +20,7 @@ class Continent(models.Model):
     class Meta:
         managed = False
         db_table = 'continents'
-        app_label = 'continents'
+        app_label = 'countries'
 
 
 class Country(models.Model):
