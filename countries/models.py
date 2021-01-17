@@ -11,15 +11,6 @@ from django.db import models
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
-# /Users/lujainhazeem/Desktop/heroku-django/python-getting-started/continents
-# class Continent(models.Model):
-#     code = models.CharField(max_length=30, primary_key=True)
-#     name = models.CharField(blank=True, null=True)
-#
-#     class Meta:
-#         managed = False
-#         db_table = 'continents'
-#         app_label =  'continents'
 
 
 class Continent(models.Model):
@@ -38,7 +29,7 @@ class Country(models.Model):
     full_name = models.CharField(max_length=100)
     iso3 = models.CharField(max_length=3)
     number = models.SmallIntegerField(max_length=3)
-    continent = models.ForeignKey(Continent, on_delete=models.SET_NULL, db_column="continent_code")
+    continent = models.ForeignKey('countries.Continent', on_delete=models.SET_NULL, db_column="continent_code", null=True)
 
     class Meta:
         managed = False
