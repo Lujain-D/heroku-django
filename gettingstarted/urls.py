@@ -19,5 +19,6 @@ urlpatterns = [
     path("db/", hello.views.db, name="db"),
     path("admin/", admin.site.urls),
     path('shows/', include('shows.urls')),
+    path('countries/', include('countries.urls')),
 
 ]
